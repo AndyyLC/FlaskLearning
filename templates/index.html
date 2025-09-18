@@ -10,19 +10,32 @@
 
 <div class="content"> 
         <h1>Welcome to the Test Page</h1>
+
+
+
+        {% if tasks | length < 1 %}
+        <h3> there are no tasks yet </h3>
+        {% else %}
         <table> 
             <tr> 
                 <th>Task</th>
                 <th>Added</th>
-                <th>Actions</th>
+                <th>Actions</th>    
             </tr>
-            <tr> 
-                <td>Content</td>
-                <td>Date</td>
-                <td>More</td>
-            </tr>
+            {% for task in tasks %}
+                <tr> 
+                    <td>Content {{task.content}}</td>
+                    <td>Date {{ task.createdAt.strftime("%Y-%m-%d") }}</td>
+                    <td>
+                        <a href="/update/{{task.id}}">Edit</a>
+                        <br>
+                        <a href="/delete/{{task.id}}">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
         </table>
-        <form action="">
+        {% endif %}
+        <form action="/" method="POST">    
             <input type="text" name="content" id="content">
             <input type="submit" value="Add Task" id="btn_add">
             
