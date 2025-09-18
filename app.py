@@ -61,7 +61,7 @@ def edit(id:int):
             return f"An error occurred while updating the task: {e}"
         
     else:
-        return "HOME"
+        return render_template('edit.html', task=task)
 
 if __name__ == '__main__':
     with app.app_context():
