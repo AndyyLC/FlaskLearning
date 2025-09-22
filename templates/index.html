@@ -24,8 +24,8 @@
             </tr>
             {% for task in tasks %}
                 <tr> 
-                    <td>Content {{task.content}}</td>
-                    <td>Date {{ task.createdAt.strftime("%Y-%m-%d") }}</td>
+                    <td>{{task.content}}</td>
+                    <td>{{ task.createdAt.strftime("%Y-%m-%d") }}</td>
                     <td>
                         <a href="/update/{{task.id}}">Edit</a>
                         <br>

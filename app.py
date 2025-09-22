@@ -9,6 +9,7 @@ app = Flask(__name__)
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///DatabaseAlchemy.db'
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db = SQLAlchemy(app)
 
 class Task(db.Model):
@@ -19,6 +20,9 @@ class Task(db.Model):
 
     def __repr__(self) -> str:
         return f"<Task {self.id}>"
+    
+with app.app_context():
+        db.create_all()
         
 @app.route('/',methods=["POST","GET"])
 def index():
@@ -64,7 +68,4 @@ def edit(id:int):
         return render_template('edit.html', task=task)
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-
-app.run(debug=True)
+    app.run(debug=True)
